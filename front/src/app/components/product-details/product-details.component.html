@@ -1,0 +1,30 @@
+<div class="product-details-container">
+    <div class="product-left">
+        <div class="product-image">
+            <img [src]="product.imageUrl" alt="{{product.name}}" />
+        </div>
+    </div>
+    <div class="product-right">
+        <h1>{{ product.name }}</h1>
+
+        <div class="size-selection">
+            <label for="sizesDropdown" class="price">Size:</label>
+            <select id="sizesDropdown" [(ngModel)]="selectedValue" (change)="onSelectionChange($event)">
+                <option *ngFor="let productSize of productSizes" [value]="productSize.sizeDto.description">
+                    {{productSize.sizeDto.description}}
+                </option>
+            </select>
+        </div>
+
+        <p class="price">Price: {{ product.unitPrice | currency }}</p>
+
+        <div class="add-to-cart">
+            <button (click)="addToCart()" class="btn btn-info btn-sm">Add to Cart</button>
+        </div>
+    </div>
+</div>
+
+<!-- No product available message -->
+<div *ngIf="!product">
+    <p>Product details are not available at the moment.</p>
+</div>

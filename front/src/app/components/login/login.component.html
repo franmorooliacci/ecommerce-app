@@ -1,0 +1,17 @@
+<div class="wrapper">
+    <div class="logo">
+        <img src="../../assets/images/logo.png" alt="">
+    </div>
+    <div class="text-center mt-4 name">
+        Football Shop
+    </div>
+    <form [formGroup]="form" (ngSubmit)="login()" class="p-3 mt-3">
+        <div class="form-field d-flex align-items-center">
+            <input id="username" formControlName="username" type="text" placeholder="Username" required>
+        </div>
+        <div class="form-field d-flex align-items-center">
+            <input id="password" formControlName="password" type="password" placeholder="Password" required>
+        </div>
+        <button type="submit" class="btn mt-3">Login</button>
+    </form>
+</div>

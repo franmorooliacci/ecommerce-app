@@ -1,0 +1,65 @@
+<div class="main-content">
+    <div class="section-content section-content-p30">
+        <!-- if user is authenticated show products -->
+        <div *ngIf="authService.currentUserSignal()">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- loop over the collection of products -->
+                    <div *ngFor="let tempProduct of products" class="col-md-3">
+                        <div class="product-box grid-item">
+
+                            <a routerLink="/products/{{ tempProduct.id }}">
+                                <img src="{{ tempProduct.imageUrl }}" class="img-responsive">
+                            </a>
+
+                            <a routerLink="/products/{{ tempProduct.id }}" style="text-decoration: none;">
+                                <h1>{{ tempProduct.name }}</h1>
+                            </a>
+
+                            <div class="price">{{ tempProduct.unitPrice | currency:'USD' }}</div>
+                            <!--
+                            <button (click)="addToCart(tempProduct)" class="btn btn-info btn-sm">Add to cart</button>
+                            -->
+                        </div>
+                    </div>
+
+                    <!--display a message if products not found-->
+                    <div *ngIf="products.length == 0" class="alert alert-warning col-md-12" role="alert">
+                        No products found.
+                    </div>
+
+                </div>
+
+
+                <!-- begin footer -->
+                <div class="footer-pagination">
+                    <div class="row">
+                        <div class="col-md-6"></div>
+
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-9" style="padding-left: 30%">
+
+                                    <ngb-pagination [(page)]="pageNumber" [pageSize]="pageSize"
+                                        [collectionSize]="totalElements" [maxSize]="3" [boundaryLinks]="false"
+                                        (pageChange)="listProducts()">
+
+                                    </ngb-pagination>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- end footer -->
+            </div>
+        </div>
+        <!-- display a message if user not registered/logged in-->
+        <div *ngIf="authService.currentUserSignal() === null">
+            <div class="alert alert-danger mt-1">
+                Register or log in to view products.
+            </div>
+        </div>
+    </div>
+</div>
